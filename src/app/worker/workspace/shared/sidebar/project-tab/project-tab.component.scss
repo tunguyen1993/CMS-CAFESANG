@@ -1,0 +1,60 @@
+.project__content__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: capitalize;
+  font-size: 16px;
+  padding: 10px 5px;
+  border-radius: 7px;
+  &:hover{
+    background: #DDE6F0;
+  }
+  &__icon{
+
+  }
+  &__name{
+
+  }
+  &__status{
+
+  }
+  &__show-more{
+    position: relative;
+    &__dropdown-list{
+      position: absolute;
+      z-index: 9999;
+      padding: 0;
+      &:before{
+        content: "";
+        border-color: transparent transparent white transparent;
+        border-style: solid;
+        border-width: 0 10px 10px 10px;
+        position: absolute;
+        top: -10px;
+        right: 10px;
+      }
+      width: 12em;
+      margin: 0;
+      list-style: none;
+      right: -10px;
+      background: white;
+      border-radius: 10px;
+      top: 2em;
+      &__item{
+        border-bottom: 1px solid #DDE6F0;
+        padding: 7px 15px;
+        display: flex;
+        justify-content: space-between;
+        &:last-child{
+          border: none !important;
+          margin-top: 10px;
+        }
+        &:first-child{
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}
+
+

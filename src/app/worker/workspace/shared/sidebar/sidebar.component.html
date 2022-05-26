@@ -1,0 +1,22 @@
+<section class="project">
+  <section class="project__head">
+    <span class="project__head__title">Project</span>
+    <span class="project__head__action" (click)="addProject()">
+      <nb-icon class="project__head__action_icon" nbPrefix icon="plus-outline"></nb-icon>
+    </span>
+  </section>
+  <section class="project__content">
+    <app-project-tab></app-project-tab>
+  </section>
+</section>
+<section class="project">
+  <section class="project__head">
+    <span class="project__head__title">Member</span>
+    <span class="project__head__action" (click)="addMember()">
+      <nb-icon class="project__head__action_icon" nbPrefix pack="theme-icon-pack" icon="add-user"></nb-icon>
+    </span>
+  </section>
+  <section class="project__content">
+    <app-member-tab></app-member-tab>
+  </section>
+</section>

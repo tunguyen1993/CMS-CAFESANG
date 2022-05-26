@@ -1,0 +1,29 @@
+<nb-card>
+  <nb-card-header> Add Member </nb-card-header>
+  <nb-card-body>
+    <div >
+      <div class="form-group addJob__body__form__group">
+        <label for="내용" class="addJob__body__form__group__label">회원 추가</label>
+        <input id="내용"
+               type="text" nbInput fullWidth
+               status="basic"
+               placeholder="Default"
+               class="addJob__body__form__group__input">
+      </div>
+      <div class="form-group addJob__body__form__group">
+        <label for="내용" class="addJob__body__form__group__label">회원 추가</label>
+        <nb-select placeholder="Select Showcase" fullWidth >
+          <nb-option value="">Option empty</nb-option>
+          <nb-option value="0">Option 0</nb-option>
+          <nb-option value="1">Option 1</nb-option>
+          <nb-option value="2">Option 2</nb-option>
+          <nb-option value="3">Option 3</nb-option>
+          <nb-option value="4">Option 4</nb-option>
+        </nb-select>
+      </div>
+      <div class="form-group">
+        <button type="reset" (click)="close()">Cancel</button>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

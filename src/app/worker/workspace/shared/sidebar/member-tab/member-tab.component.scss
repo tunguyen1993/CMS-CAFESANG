@@ -1,0 +1,46 @@
+.project__content__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: capitalize;
+  font-size: 16px;
+  padding: 10px 5px;
+  border-radius: 7px;
+  &:hover{
+    background: #DDE6F0;
+  }
+  &__icon{
+
+  }
+  &__name{
+
+  }
+  &__status{
+
+  }
+  &__show-more{
+    position: relative;
+    &__dropdown-list{
+      position: absolute;
+      width: 10em;
+      margin: 0;
+      list-style: none;
+      right: 0;
+      background: white;
+      padding: 10px 0;
+      border-radius: 10px;
+      top: 3em;
+      &__item{
+        border-bottom: 1px solid #DDE6F0;
+        padding: 7px 10px;
+        display: flex;
+        justify-content: space-between;
+        &:last-child{
+          border: none !important;
+        }
+      }
+    }
+  }
+}
+
+

@@ -1,0 +1,25 @@
+.profile-main {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    &__title{
+      font-size: 20px;
+      font-weight: bolder;
+    }
+    &__icon{
+
+    }
+  }
+  &__content{
+    &__form{
+      &__full-name, &__gender, &__date-of-birth,&__email, &__phone-number{
+        margin-bottom: 20px;
+        label{
+          font-size: 15px;
+          color: #95A5B8;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,108 @@
+@import "../../../themes";
+
+
+.workspace-content {
+  &__first-block {
+    &__colum {
+      margin-bottom: 2em;
+
+      &__link, &__overview {
+        border-radius: 10px;
+        padding: 20px;
+        background: #F8FAFC;
+        margin: 0;
+        height: 100%;
+
+        > div:first-child {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 40px
+        }
+      }
+
+      &__overview {
+
+      }
+
+      &__link {
+
+      }
+    }
+  }
+
+  &__second-block {
+    &__card {
+      &__table {
+
+        &__thead {
+          &__action {
+            position: relative;
+            text-align: center;
+
+            &__dropdown {
+              position: absolute;
+              width: 10em;
+              background: white;
+
+              > nb-checkbox, nb-radio {
+                padding: 10px 0;
+                border-bottom: 1px solid black
+              }
+            }
+          }
+        }
+
+        &__tbody {
+          vertical-align: middle;
+          text-align: center;
+          &__item {
+            &__order {
+            }
+
+            &__created {
+            }
+
+            &__content {
+            }
+
+            &__priority {
+            }
+
+            &__image {
+            }
+
+            &__comment {
+            }
+
+            &__created-time {
+            }
+
+            &__finished-date {
+            }
+
+            &__status {
+              text-align: center;
+              position: relative;
+              &__dropdown {
+                visibility: hidden;
+                position: absolute;
+                width: 10em;
+                right: 0;
+                border-bottom: 0;
+                background-color: white;
+                box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+                border-radius: 10px;
+              }
+              &:hover{
+                .workspace-content__second-block__card__table__tbody__item__status__dropdown{
+                  visibility: unset !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+@use 'themes' as *;
+
+@use '@nebular/theme/styles/globals' as *;
+
+@include nb-install() {
+  @include nb-theme-global();
+}
+
+
+;
+/* You can add global styles to this file, and also import other style files */
+
+$primary-fist: #0162F2;
+$primary-second: #9EC5FF;
+
+$secondary: #95A5B8;
+
+$accent: #00CBBD;
+
+$danger: #E94949;
+$warning: #FF9F43;
+
+$overlay-40-percent: #CCCCD9;
+$overlay-60-percent: #6D727A;
+
+

@@ -1,0 +1,70 @@
+<nb-card class="addJob">
+  <nb-card-header class="addJob__title">업무생성</nb-card-header>
+  <nb-card-body class="addJob__body">
+    <form action="" class="addJob__body__form" [formGroup]="addJobForm">
+      <div class="form-group addJob__body__form__group">
+        <label for="내용" class="addJob__body__form__group__label">내용</label>
+        <input id="내용" formControlName="content"
+               type="text" nbInput fullWidth
+               status="basic"
+               placeholder="Default"
+               class="addJob__body__form__group__input">
+      </div>
+      <div class="form-group addJob__body__form__group">
+        <label for="상태" class="addJob__body__form__group__label">상태</label>
+        <nb-select id="상태" placeholder="Select Showcase" formControlName="status"
+                   class="addJob__body__form__group__input" [multiple]='false' fullWidth>
+          <nb-option value="">Option empty</nb-option>
+          <nb-option value="0">Option 0</nb-option>
+          <nb-option value="1">Option 1</nb-option>
+          <nb-option value="2">Option 2</nb-option>
+          <nb-option value="3">Option 3</nb-option>
+          <nb-option value="4">Option 4</nb-option>
+        </nb-select>
+      </div>
+      <div class="form-group addJob__body__form__group">
+        <label for="우선순위" class="addJob__body__form__group__label">우선순위</label>
+        <nb-select id="우선순위" placeholder="Select Showcase" [multiple]='false' formControlName="priority"
+                   class="addJob__body__form__group__input" fullWidth>
+          <nb-option value="">Option empty</nb-option>
+          <nb-option value="0">Option 0</nb-option>
+          <nb-option value="1">Option 1</nb-option>
+          <nb-option value="2">Option 2</nb-option>
+          <nb-option value="3">Option 3</nb-option>
+          <nb-option value="4">Option 4</nb-option>
+        </nb-select>
+      </div>
+      <div class="form-group addJob__body__form__group">
+        <label class="addJob__body__form__group__label">링크</label>
+        <nb-tag-list (tagRemove)="onTagRemove($event)" class="addJob__body__form__group__input">
+          <nb-tag *ngFor="let tree of trees" [text]="tree" removable></nb-tag>
+          <input type="text" nbTagInput (tagAdd)="onTagAdd($event)" fullWidth formControlName="link">
+        </nb-tag-list>
+      </div>
+      <div class="form-group addJob__body__form__group">
+        <label class="addJob__body__form__group__label">이미지</label>
+        <div class="row addJob__body__form__group__row">
+          <div class="col-md-3 addJob__body__form__group__row__md">
+            <img src="../../../../../assets/images/add.png" alt="" class="addJob__body__form__group__row__md__icon">
+            <input class="addJob__body__form__group__row__md__inputFile"
+                   accept="image/x-png,image/gif,image/jpeg"
+                   multiple
+                   (change)="onFileChange($event)"
+                   type="file">
+          </div>
+          <div class="col-md-3 addJob__body__form__group__row__image" *ngFor="let file of imageList; let i = index">
+            <nb-icon icon="close-outline" class="remove-image" (click)="removeImage(i)"></nb-icon>
+            <img [src]="file" alt="" class="w-100">
+          </div>
+        </div>
+      </div>
+      <div class="form-group addJob__body__form__group_button">
+        <button nbButton (click)="close()" class="addJob__body__form__group_button__button" type="button">Cancel
+        </button>
+        <button nbButton hero status="info" class="addJob__body__form__group_button__buttonSubmit" type="button"
+                (click)="onSubmit()">Add
+        </button>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

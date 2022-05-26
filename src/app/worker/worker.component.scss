@@ -1,0 +1,21 @@
+::ng-deep {
+  .nb-theme-default .main-sidebar{
+    background: #2C3147;
+  }
+  .nb-theme-default nb-layout .layout .layout-container nb-sidebar.fixed, .nb-theme-default nb-layout .layout .layout-container nb-sidebar .main-container-fixed{
+    top: 0 !important;
+  }
+  nb-sidebar-header{
+    padding: .80rem !important;
+  }
+  .menu-item{
+    border: unset !important;
+    margin-bottom: 2em;
+    text-align: center;
+    >a{
+      nb-icon{
+        margin: unset !important;
+      }
+    }
+  }
+}

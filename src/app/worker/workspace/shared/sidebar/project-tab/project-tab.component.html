@@ -1,0 +1,49 @@
+<section class="project__content__item">
+  <span class="project__content__item__icon">
+     <nb-icon nbPrefix icon="project-icon" pack="theme-icon-pack"></nb-icon>
+  </span>
+  <span class="project__content__item__name">
+        busandal61
+  </span>
+  <span class="project__content__item__status">
+        <button nbButton hero status="warning" size="tiny">tiny</button>
+  </span>
+  <span class="position-relative float-end project__content__item__show-more">
+        <nb-icon nbPrefix icon="more-vertical-outline" (click)="dropdown()"></nb-icon>
+        <ul
+          [class]="dropDownClass ? 'project__content__item__show-more__dropdown-list d-block' :  'project__content__item__show-more__dropdown-list d-none'">
+          <li class="project__content__item__show-more__dropdown-list__item">
+            <span>
+              수정
+            </span>
+            <span>
+                   <nb-icon nbPrefix icon="edit" pack="theme-icon-pack"></nb-icon>
+            </span>
+          </li>
+          <li class="project__content__item__show-more__dropdown-list__item">
+            <span>
+              완료
+            </span>
+            <span>
+                   <nb-icon nbPrefix icon="sidebar-check" pack="theme-icon-pack"></nb-icon>
+            </span>
+          </li>
+          <li class="project__content__item__show-more__dropdown-list__item">
+            <span>
+              진행중
+            </span>
+            <span>
+               <nb-icon nbPrefix icon="star" pack="theme-icon-pack"></nb-icon>
+            </span>
+          </li>
+          <li class="project__content__item__show-more__dropdown-list__item">
+            <span>
+              삭제
+            </span>
+            <span>
+              <nb-icon nbPrefix icon="trash" pack="theme-icon-pack"></nb-icon>
+            </span>
+          </li>
+        </ul>
+  </span>
+</section>
