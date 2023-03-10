@@ -1,0 +1,52 @@
+<nb-card>
+    <nb-card-header>Cài Đặt</nb-card-header>
+    <nb-card-body>
+        <ng-container *ngIf="configs.length">
+            <div *ngFor="let config of configs" class="mb-2" >
+                <section class="header mb-1">
+                    <strong class="title text-uppercase">
+                        {{ config.type }}
+                    </strong>
+                </section>
+                <input type="text" nbInput fullWidth
+                       (ngModelChange)="changeInput($event, config)"
+                       status="basic" placeholder="Default"
+                       [(ngModel)]="config.link ?? config.content"
+                       >
+            </div>
+        </ng-container>
+        <div class="mb-2">
+            <section class="header mb-1">
+                <strong class="title text-uppercase">
+                   Fake Data
+                </strong>
+            </section>
+            <nb-select fullWidth placeholder="Select Showcase" [(ngModel)]="fakeData" (ngModelChange)="changeSettingFakeData()">
+                <nb-option value="0">Tắt</nb-option>
+                <nb-option value="1">Mở</nb-option>
+            </nb-select>
+        </div>
+        <div class="mb-2">
+            <section class="header mb-1">
+                <strong class="title text-uppercase">
+                    Open Link
+                </strong>
+            </section>
+            <nb-select fullWidth placeholder="Select Showcase" [(ngModel)]="openLink" (ngModelChange)="changeSettingConfigOpenLink()">
+                <nb-option value="0">Tắt</nb-option>
+                <nb-option value="1">Mở</nb-option>
+            </nb-select>
+        </div>
+        <div class="mb-2">
+            <section class="header mb-1">
+                <strong class="title text-uppercase">
+                    Enable Login
+                </strong>
+            </section>
+            <nb-select fullWidth placeholder="Select Showcase" [(ngModel)]="enableLogin" (ngModelChange)="changeSettingConfigEnableLogin()">
+                <nb-option value="0">Tắt</nb-option>
+                <nb-option value="1">Mở</nb-option>
+            </nb-select>
+        </div>
+    </nb-card-body>
+</nb-card>

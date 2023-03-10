@@ -14,7 +14,7 @@ export class LoginComponent extends NbLoginComponent implements OnInit {
   ngOnInit() {
     this.service.onTokenChange().subscribe((token) => {
       if (token.isValid()) {
-        // this.router.navigate(['/dashboard']).then(); // Your redirection goes here
+        this.router.navigate(['/dashboard']).then(); // Your redirection goes here
       }
     });
   }

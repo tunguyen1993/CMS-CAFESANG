@@ -43,11 +43,15 @@ import {AuthComponent} from "./auth.component";
     FormsModule,
     RouterModule,
     HttpClientModule,
-    NbThemeModule.forRoot(),
-    NbSidebarModule.forRoot(),
-    NbMenuModule.forRoot(),
     NbEvaIconsModule,
     AuthRoutingModule,
+    FormsModule,
+    NbCheckboxModule,
+    NbButtonModule,
+    NbInputModule,
+    NbAlertModule,
+    NbFormFieldModule,
+    NbIconModule,
     NbAuthModule.forRoot({
       strategies: [
         NbPasswordAuthStrategy.setup({
@@ -57,7 +61,7 @@ import {AuthComponent} from "./auth.component";
           },
           baseEndpoint: environment.api_url,
           login: {
-            endpoint: 'auth/login',
+            endpoint: '/auth/login',
             method: 'post',
             redirect: {
               success: '/dashboard',
@@ -65,7 +69,7 @@ import {AuthComponent} from "./auth.component";
             },
           },
           logout: {
-            endpoint: 'auth/logout',
+            endpoint: '/auth/logout',
             method: 'get',
           },
         }),
@@ -86,13 +90,7 @@ import {AuthComponent} from "./auth.component";
         },
       },
     }),
-    FormsModule,
-    NbCheckboxModule,
-    NbButtonModule,
-    NbInputModule,
-    NbAlertModule,
-    NbFormFieldModule,
-    NbIconModule,
+
   ],
   providers: [
     NbFocusMonitor,

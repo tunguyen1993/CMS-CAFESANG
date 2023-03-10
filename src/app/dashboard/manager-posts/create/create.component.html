@@ -1,0 +1,82 @@
+<nb-card>
+    <nb-card-header>Tạo Bài Viết</nb-card-header>
+    <nb-card-body *ngIf="angForm">
+        <form [formGroup]="angForm" novalidate (ngSubmit)="onSubmit()">
+            <div class="form-group mb-4">
+                <label class="center-block w-100">
+                    <div class="mb-3 text-capitalize"><b>Tên Bài Viết:</b></div>
+                    <input type="text" nbInput fullWidth
+                           [status]="angForm.controls['title'].invalid && (angForm.controls['title'].dirty || angForm.controls['title'].touched) ? 'danger' : 'basic'"
+                           placeholder="Tên Bài Viết" formControlName="title">
+                </label>
+            </div>
+            <div class="form-group mb-4" >
+                <div class="mb-3 text-capitalize">Tải Ảnh</div>
+                <div style="position: relative;" *ngIf="!imageList">
+                    <img src="http://localhost:3000/assets/images/add.png" alt="">
+                    <input accept="image/*"
+                           multiple (change)="uploadImageFile($event)"
+                           formControlName="image" type="file" style="left: 0;top: 0;height: 100%;opacity: 0;position: absolute;">
+                </div>
+                <ng-container *ngIf="imageList">
+                    <div class="col-md-3"  style="position: relative">
+                        <nb-icon icon="close-outline" class="remove-image position-absolute" (click)="removeImage()"></nb-icon>
+                        <img src="{{ imageList.image }}" alt=""
+                             style="border-radius: 10px; height: 86px; width: 86px ; object-fit: cover">
+                    </div>
+                </ng-container>
+                <div *ngIf="angForm.controls['image'].invalid && (angForm.controls['image'].dirty || angForm.controls['image'].touched)">
+                    Ảnh không được bỏ trống
+                </div>
+            </div>
+            <div class="form-group mb-4">
+                <label class="center-block w-100">
+                    <div class="mb-3 text-capitalize"><b>Loại bài viết:</b></div>
+                    <nb-select placeholder="Loại bài viết"
+                               [status]="angForm.controls['type'].invalid && (angForm.controls['type'].dirty || angForm.controls['type'].touched) ? 'danger' : 'success'"
+                               fullWidth formControlName="type">
+                        <nb-option value="ESPORT">Thể Thao Điện Tử</nb-option>
+                        <nb-option value="SPORT">Thể Thao</nb-option>
+                        <nb-option value="VIDEO">Video</nb-option>
+                        <nb-option value="DEFAULT">Bài Viết Thường</nb-option>
+                    </nb-select>
+                </label>
+            </div>
+            <div class="form-group mb-4" *ngIf="angForm.value.type ==='VIDEO';">
+                <label class="center-block w-100">
+                    <div class="mb-3 text-capitalize"><b>Loại video:</b></div>
+                    <nb-select placeholder="Loại video"
+                               fullWidth formControlName="video_type">
+                        <nb-option value="youtube">youtube</nb-option>
+                        <nb-option value="facebook">facebook</nb-option>
+                        <nb-option value="upload">upload</nb-option>
+                    </nb-select>
+                </label>
+            </div>
+
+            <div class="form-group mb-4" *ngIf="angForm.value.video_type ==='upload';">
+                <label class="center-block w-100">
+                    <div class="mb-3 text-capitalize"><b>Tải video:</b></div>
+                    <input type="file" nbInput fullWidth status="basic" formControlName="video" placeholder="Default" (change)="uploadVideoFile($event)">
+                </label>
+            </div>
+            <div class="form-group mb-4">
+                <label class="center-block w-100">
+                    <div class="mb-3 text-capitalize"><b>Liên kết:</b></div>
+                    <input type="text" nbInput fullWidth
+                           [status]="angForm.controls['link'].invalid && (angForm.controls['link'].dirty || angForm.controls['link'].touched) ? 'danger' : 'basic'"
+                           placeholder="Liên kết" formControlName="link">
+                </label>
+            </div>
+            <div class="form-group mb-4">
+                <label class="center-block w-100">
+                    <div class="mb-3 text-capitalize"><b>Nội Dung :</b></div>
+                </label>
+                <ckeditor formControlName="content"></ckeditor>
+            </div>
+            <div class="form-group mb-4">
+                <button nbButton outline status="primary">Tạo</button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>

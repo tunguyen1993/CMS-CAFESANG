@@ -1,0 +1,60 @@
+<div class="">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2 class="text-white">Quản Lý <b>Tài Khoản </b></h2>
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tên Đầy Đủ</th>
+                <th>Email</th>
+                <th>Thời Gian Tạo</th>
+                <th class="text-center">Trạng Thái</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let user of users; let i = index">
+                <td>{{ i + 1}}</td>
+                <td>{{user.full_name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.createdAt | date:'short'}}</td>
+                <td class="text-center">
+                    <nb-icon icon="person-done-outline" *ngIf="user.status === 'ACTIVE'" status="success"></nb-icon>
+                    <nb-icon icon="person-delete-outline" *ngIf="user.status === 'DEACTIVE'" status="danger"></nb-icon>
+                </td>
+                <td class="d-flex justify-content-between">
+                    <button nbButton outline status="warning" size="small">
+                        <nb-icon icon="edit-outline"></nb-icon>
+                    </button>
+                    <button nbButton outline status="danger" size="small" (click)="deActiveUser(user.id, i)"
+                            *ngIf="user.status === 'ACTIVE'">
+                        <nb-icon icon="trash-2-outline"></nb-icon>
+                    </button>
+                    <button nbButton outline status="success" *ngIf="user.status === 'DEACTIVE'" size="small"
+                            (click)="activeUser(user.id, i)">
+                        <nb-icon icon="checkmark-outline"></nb-icon>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="clearfix">
+            <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+            <ul class="pagination">
+                <li class="page-item disabled"><a href="#">Previous</a></li>
+                <li class="page-item"><a href="#" class="page-link">1</a></li>
+                <li class="page-item"><a href="#" class="page-link">2</a></li>
+                <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                <li class="page-item"><a href="#" class="page-link">4</a></li>
+                <li class="page-item"><a href="#" class="page-link">5</a></li>
+                <li class="page-item"><a href="#" class="page-link">Next</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

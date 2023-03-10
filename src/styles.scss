@@ -1,26 +1,80 @@
 @use 'themes' as *;
 
-@use '@nebular/theme/styles/globals' as *;
+$theme: (
+        color-primary: #5A5DF8,
+        text-basic-color: #455264,
+        font-family-primary: "Noto Sans KR script=all rev=2"
+);
+
+@import "~@nebular/theme/styles/globals";
+@import '~@nebular/auth/styles/globals';
+
 
 @include nb-install() {
   @include nb-theme-global();
+  @include nb-auth-global()
+}
+
+;
+
+nb-menu .menu-item a.active {
+  border-left: 3px solid #5A5DF8 !important;
+  background-color: #f5f7ff;
+  span{
+    color: #5A5DF8 !important;
+  }
+}
+
+span, div, td {
+  color: #455264;
 }
 
 
-;
-/* You can add global styles to this file, and also import other style files */
+.ngx-slider .ngx-slider-pointer:after {
+  content: "";
+  width: 14px !important;
+  height: 14px !important;
+  position: absolute;
+  top: 2px !important;
+  left: 2px !important;
+  border-radius: 26px !important;
+  background: #fff !important;
+}
 
-$primary-fist: #0162F2;
-$primary-second: #9EC5FF;
+.ngx-slider .ngx-slider-pointer .ngx-slider-active:after {
+  background: #fff !important;
+}
 
-$secondary: #95A5B8;
+.ngx-slider .ngx-slider-selection{
+  background: #5A5DF8 !important;
+}
 
-$accent: #00CBBD;
+.ngx-slider .ngx-slider-pointer {
+  cursor: pointer;
+  width: 18px !important;
+  height: 18px !important;
+  top: -9px !important;
+  background-color: #5A5DF8 !important;
+  z-index: 3;
+  border-radius: 100px !important;
+}
 
-$danger: #E94949;
-$warning: #FF9F43;
+.ngx-slider .ngx-slider-bar{
+  height: 2px !important;
+}
 
-$overlay-40-percent: #CCCCD9;
-$overlay-60-percent: #6D727A;
+nb-card{
+  border-radius: 12px;
+  border: none;
+}
+nb-card{
+  max-height: 100%;
+}
+
+.ngx-slider-bubble{
+  padding: 5px 20px !important;
+  border: 1px solid #dde6f0;
+  border-radius: 20px ;
+}
 
 
