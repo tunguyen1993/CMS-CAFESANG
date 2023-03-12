@@ -43,6 +43,44 @@ import {PostService} from "./dashboard/manager-posts/post.service";
       closeOnBackdropClick: false,
       closeOnEsc: false,
     }),
+    NbAuthModule.forRoot({
+      strategies: [
+        NbPasswordAuthStrategy.setup({
+          name: 'email',
+          token: {
+            class: NbAuthJWTToken,
+          },
+          baseEndpoint: environment.api_url,
+          login: {
+            endpoint: '/auth/login',
+            method: 'post',
+            redirect: {
+              success: '/dashboard',
+              failure: null, // stay on the same page
+            },
+          },
+          logout: {
+            endpoint: '/auth/logout',
+            method: 'get',
+          },
+        }),
+      ],
+      forms: {
+        logout: {
+          redirectDelay: 0,
+          strategy: 'email',
+        },
+        login: {
+          redirectDelay: 100, // delay before redirect after a successful login, while success message is shown to the user
+          strategy: 'email',  // strategy id key.
+          rememberMe: true,   // whether to show or not the `rememberMe` checkbox
+          showMessages: {     // show/not show success/error messages
+            success: true,
+            error: true,
+          },
+        },
+      },
+    }),
     ReactiveFormsModule,
     NbThemeModule.forRoot(),
     NbSidebarModule.forRoot(),

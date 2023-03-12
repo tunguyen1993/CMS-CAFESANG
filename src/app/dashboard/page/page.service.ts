@@ -5,29 +5,30 @@ import PostTypeConst from "../../core/const/post-type.const";
 
 @Injectable()
 export class PageService extends BaseAPIService {
-    getPageData(pageNumber: number) {
-        return this.actionGet(`${ApiConst.GET_PAGE}/${pageNumber}`)
+    getPageData(pageNumber: number, fake: boolean = false) {
+        return this.actionGet(`${ApiConst.GET_PAGE}/${pageNumber}?fake=${fake ? "fake" : ""}`)
     }
 
-    getPostType(postType: "POST" | "ADS" | "CATEGORY", category_id: number | undefined = undefined) {
+    getPostType(postType: "POST" | "ADS" | "CATEGORY", category_id: number | undefined = undefined, fake: boolean = false) {
         if (postType === "CATEGORY") {
-            return this.getPostByCategory()
+            return this.getPostByCategory(fake)
         }
         if (category_id) {
-            return this.getPostsByCategory(category_id)
+            return this.getPostsByCategory(category_id, fake)
         }
-        return this.actionGet(`${ApiConst.GET_POST_TYPE}?type=${PostTypeConst[postType]}`)
+        return this.actionGet(`${ApiConst.GET_POST_TYPE}?type=${PostTypeConst[postType]}?fake=${fake ? "fake" : ""}`)
     }
 
-    getPostsByCategory(categoryId: number) {
-        return this.actionGet(`${ApiConst.GET_POST_BY_CATEGORY}/${categoryId}`)
-    }
-    getPostByCategory() {
-        return this.actionGet(`${ApiConst.GET_POST_CATEGORY}?fake=`)
+    getPostsByCategory(categoryId: number, fake: boolean = false) {
+        return this.actionGet(`${ApiConst.GET_POST_BY_CATEGORY}/${categoryId}?fake=${fake ? "fake" : ""}`)
     }
 
-    getPageTypeDetail(pageType: number) {
-        return this.actionGet(`${ApiConst.GET_PAGE_TYPE}/${pageType}`)
+    getPostByCategory(fake: boolean = false) {
+        return this.actionGet(`${ApiConst.GET_POST_CATEGORY}?fake=${fake ? "fake" : ""}`)
+    }
+
+    getPageTypeDetail(pageType: number, fake: boolean = false) {
+        return this.actionGet(`${ApiConst.GET_PAGE_TYPE}/${pageType}?fake=${fake ? "fake" : ""}`)
     }
 
     addPageItem(body: {
@@ -39,7 +40,7 @@ export class PageService extends BaseAPIService {
         }>;
         page_id: number;
         page_type_id: number
-    }) {
-        return this.actionPost(`${ApiConst.ADD_PAGE_ITEM}`, body)
+    }, fake: boolean = false) {
+        return this.actionPost(`${ApiConst.ADD_PAGE_ITEM}?fake=${fake ? "fake" : ""}`, body)
     }
 }

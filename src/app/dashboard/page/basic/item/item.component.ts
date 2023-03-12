@@ -7,6 +7,7 @@ import {PageService} from "../../page.service";
   styleUrls: ['./item.component.scss']
 })
 export class ItemComponent implements OnInit {
+  @Input() fake: boolean = false
   @Input() page_data: any | null;
   data: any = [];
   models: any = [];
@@ -23,7 +24,7 @@ export class ItemComponent implements OnInit {
   }
 
   getPost (){
-    this.service.getPostType(this.page_data.type, this.page_data.category_id ?? undefined).subscribe(res => {
+    this.service.getPostType(this.page_data.type, this.page_data.category_id ?? undefined, this.fake).subscribe(res => {
       if (this.page_data.category_id){
         res.map((category: { post: any; }) => {
           this.data.push(category.post)
@@ -77,7 +78,7 @@ export class ItemComponent implements OnInit {
         data,
         page_id:this.page_data.page_id,
         page_type_id: this.page_data.id,
-      }).subscribe(res => {
+      }, this.fake).subscribe(res => {
         this.listSelected = []
         res.map((item: any) => {
           this.listSelected.push(item.post_id)

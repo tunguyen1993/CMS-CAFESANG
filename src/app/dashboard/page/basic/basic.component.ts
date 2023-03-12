@@ -11,7 +11,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class BasicComponent implements OnInit {
     public pageTypes: any = [];
-
+    public fake: boolean = false
 
     constructor(private readonly service: PageService, public route: ActivatedRoute) {
     }
@@ -20,7 +20,8 @@ export class BasicComponent implements OnInit {
         this.route
             .data
             .subscribe((data: any) => {
-                this.service.getPageData(data.id)
+                this.fake = data.fake
+                this.service.getPageData(data.id, data.fake)
                     .subscribe(res => {
                         res.pageTypes.map((page: { type: string; id: number }, index: number) => {
                             this.pageTypes.push({
@@ -36,7 +37,7 @@ export class BasicComponent implements OnInit {
 
 
     getPageTypeDetail(id: number, index: number) {
-        this.service.getPageTypeDetail(id).subscribe(res => {
+        this.service.getPageTypeDetail(id, this.fake).subscribe(res => {
             this.pageTypes[index].data = res.items;
         })
     }

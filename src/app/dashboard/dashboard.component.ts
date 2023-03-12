@@ -49,9 +49,43 @@ export class DashboardComponent implements OnInit {
             ],
         },
         {
-            title: "QUAN LY TRANG FAKE",
-            link: 'profile',
-            icon: {icon: 'checkmark-outline', pack: 'eva'},
+            title: "Quản Lý Trang FAKE",
+            icon: {icon: 'flag-outline', pack: 'eva'},
+            children: [
+                {
+                    title: 'Trang Chủ',
+                    link: '/dashboard/home-fake',
+                },
+                {
+                    title: 'Thể Thao Điện Tử',
+                    link: '/dashboard/e-sport-fake',
+                },
+                {
+                    title: 'Tin Nóng',
+                    link: '/dashboard/hot-news-fake',
+                },
+                {
+                    title: 'HOT',
+                    children: [
+                        {
+                            title: 'Thể Thao',
+                            link: '/dashboard/sport-fake',
+                        },
+                        {
+                            title: 'Live Stream',
+                            link: '/dashboard/live-stream-fake',
+                        },
+                    ]
+                },
+                {
+                    title: 'Video',
+                    link: '/dashboard/video-fake',
+                },
+                {
+                    title: 'Thẻ Trò Chơi',
+                    link: '/dashboard/game-card-fake',
+                },
+            ],
         },
         {
             title: "Quản Lý Bài Viết",

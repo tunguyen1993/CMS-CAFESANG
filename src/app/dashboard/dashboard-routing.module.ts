@@ -14,7 +14,7 @@ import {CreateNotiComponent} from "./manager-posts/create-noti/create-noti.compo
 
 const routes: Routes = [
     {
-        path: '',
+        path: "",
         component: DashboardComponent,
         children: [
             {
@@ -64,6 +64,68 @@ const routes: Routes = [
                 component: BasicComponent,
                 data: {
                     id: 3
+                }
+            }
+        ]
+    },
+    {
+        path: "",
+        component: DashboardComponent,
+        children: [
+            {
+                path: "home-fake",
+                component: BasicComponent,
+                data: {
+                    id: 1,
+                    fake: true
+                }
+            },
+            {
+                path: "e-sport-fake",
+                component: BasicComponent,
+                data: {
+                    id: 2,
+                    fake: true
+                }
+            },
+            {
+                path: "hot-news-fake",
+                component: BasicComponent,
+                data: {
+                    id: 10,
+                    fake: true
+                }
+            },
+            {
+                path: "sport-fake",
+                component: BasicComponent,
+                data: {
+                    id: 8,
+                    fake: true
+                }
+            },
+            {
+                path: "live-stream-fake",
+                component: BasicComponent,
+                data: {
+                    id: 9,
+                    fake: true
+                }
+            },
+            {
+                path: "video-fake",
+                component: BasicComponent,
+                data: {
+                    id: 5,
+                    fake: true
+                }
+            },
+            {
+                path: "game-card-fake",
+                component: BasicComponent,
+                data: {
+                    id: 3,
+                    fake: true
                 }
             }
         ]
