@@ -94,7 +94,6 @@ export class ListsComponent implements OnInit {
     }
 
     onUpdate(post) {
-        console.log(post)
         this.dialogService.open(this.componentWithType[this.post_type], {
             closeOnBackdropClick: true, context: {
                 _type: "update",

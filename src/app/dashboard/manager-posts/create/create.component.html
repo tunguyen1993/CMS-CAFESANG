@@ -1,8 +1,10 @@
 <nb-card  [ngStyle]="{'width': isFullSize}">
     <nb-card-header>
         <div class="d-flex justify-content-between">
-            <div><span *ngIf="_type === 'update'">Cập Nhật Bài Viết</span>
-                <span *ngIf="_type !== 'update'">Tạo Bài Viết</span></div>
+            <div>
+                <span *ngIf="_type === 'update'">Cập Nhật Bài Viết</span>
+                <span *ngIf="_type !== 'update'">Tạo Bài Viết</span>
+            </div>
             <div *ngIf="dialog">
                 <nb-icon icon="expand-outline" (click)="expand()" *ngIf="isFullSize === '640px'" ></nb-icon>
                 <nb-icon icon="collapse-outline" (click)="collapse()"  *ngIf="isFullSize !== '640px'"></nb-icon>
@@ -87,7 +89,10 @@
                 <ckeditor formControlName="content"></ckeditor>
             </div>
             <div class="form-group mb-4">
-                <button nbButton outline status="primary">Tạo</button>
+                <button nbButton outline status="primary">
+                    <span *ngIf="_type === 'update'">Cập Nhật Bài Viết</span>
+                    <span *ngIf="_type !== 'update'">Tạo Bài Viết</span>
+                </button>
             </div>
         </form>
     </nb-card-body>
