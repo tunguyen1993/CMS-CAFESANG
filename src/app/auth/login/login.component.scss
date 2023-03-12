@@ -3,7 +3,7 @@
 @import '~bootstrap/scss/mixins';
 
 $font-primary: 'Lato',Arial, sans-serif;
-$primary: #0162F2;
+$primary: rgba(1, 98, 242, 0.88);
 
 body{
   font-family: $font-primary;
@@ -170,8 +170,10 @@ textarea.form-control {
 
 //BUTTON
 .btn {
+  height:38px;
   cursor: pointer;
-  @include border-radius(40px);
+  background: $primary !important;
+  color: $white !important;
   box-shadow: none!important;
   font-size: 15px;
   &:hover, &:active, &:focus {
