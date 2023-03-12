@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NbMenuItem, NbSidebarService} from "@nebular/theme";
+import {NbMenuItem, NbMenuService, NbSidebarService} from "@nebular/theme";
 
 @Component({
     selector: 'app-dashboard',
@@ -262,11 +262,41 @@ export class DashboardComponent implements OnInit {
         }
     ];
 
-    constructor(private sidebarService: NbSidebarService) {
+    user: {
+        avatar: string | null
+        exp: number
+        full_name: string
+        iat: number
+        id: number
+        verify: number
+        role: {
+            role_id: number
+            updatedAt: string
+            user_id: number
+            role: {
+                createdAt: string
+                id: number
+                name: string
+                updatedAt: string
+            }
+        }
+    } | undefined = undefined;
+
+    constructor(private sidebarService: NbSidebarService,
+                private menuService: NbMenuService) {
     }
 
     ngOnInit(): void {
+        this.menuService.onItemClick()
+            .subscribe((event) => {
+                if (event.item.title === "Thoát"){
+                    localStorage.clear();
+                    location.reload();
+                }
+            });
     }
+
+
 
     toggle() {
         this.sidebarService.toggle(true);

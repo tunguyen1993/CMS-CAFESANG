@@ -28,6 +28,7 @@ import {PageService} from "./dashboard/page/page.service";
 import {SettingsService} from "./dashboard/settings/settings.service";
 import {AccountsService} from "./dashboard/accounts/accounts.service";
 import {PostService} from "./dashboard/manager-posts/post.service";
+import {AuthGuard} from "./auth-guard.service";
 
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import {PostService} from "./dashboard/manager-posts/post.service";
     SettingsService,
     AccountsService,
     PostService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

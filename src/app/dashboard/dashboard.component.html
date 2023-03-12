@@ -1,15 +1,24 @@
 <nb-layout>
     <nb-layout-header fixed>
-        <div class="header-container">
-            <div class="logo-container d-flex align-items-center" >
-                <a  href="#"  class="mat-ripple sidebar-toggle mat-ripple-unbounded"
-                    style="margin-right: 1.25rem;"
-                    (click)="toggle()">
+        <div class="header-container d-flex align-content-between w-100">
+            <div class="logo-container d-flex align-items-center">
+                <a href="#" class="mat-ripple sidebar-toggle mat-ripple-unbounded"
+                   style="margin-right: 1.25rem;"
+                   (click)="toggle()">
                     <nb-icon icon="menu-arrow-outline" style="font-size: 2em; color:#acb1bb"></nb-icon>
                 </a>
-                <a  href="#" class="logo" style="padding: 0 1.25rem;
+                <a href="#" class="logo" style="padding: 0 1.25rem;
     font-size: 1rem;
     white-space: nowrap;">CAFE SANG</a></div>
+        </div>
+        <div class="header-container">
+            <nb-user class="pull-right"
+                     name="ADMIN"
+                     [nbContextMenu]="[
+                { title: 'Thoát' },
+              ]"
+                     nbContextMenuTag="my-context-menu">
+            </nb-user>
         </div>
     </nb-layout-header>
     <nb-sidebar>

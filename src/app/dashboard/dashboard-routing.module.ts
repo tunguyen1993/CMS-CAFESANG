@@ -12,11 +12,13 @@ import {CreateAdvertisementComponent} from "./manager-posts/create-advertisement
 import {CreateGameCardComponent} from "./manager-posts/create-game-card/create-game-card.component";
 import {CreateNotiComponent} from "./manager-posts/create-noti/create-noti.component";
 import {CreateSubscribeComponent} from "./manager-posts/create-subscribe/create-subscribe.component";
+import {AuthGuard} from "../auth-guard.service";
 
 const routes: Routes = [
     {
         path: "",
         component: DashboardComponent,
+        canActivate: [AuthGuard],
         children: [
             {
                 path: "home",
@@ -72,6 +74,7 @@ const routes: Routes = [
     {
         path: "",
         component: DashboardComponent,
+        canActivate: [AuthGuard],
         children: [
             {
                 path: "home-fake",
@@ -134,6 +137,7 @@ const routes: Routes = [
     {
         path: "",
         component: DashboardComponent,
+        canActivate: [AuthGuard],
         children: [
             {
                 path: 'settings',
@@ -144,6 +148,7 @@ const routes: Routes = [
     {
         path: "",
         component: DashboardComponent,
+        canActivate: [AuthGuard],
         children: [
             {
                 path: 'account-management',
@@ -154,6 +159,7 @@ const routes: Routes = [
     {
         path: "",
         component: DashboardComponent,
+        canActivate: [AuthGuard],
         children: [
             {
                 path: 'posts',
@@ -244,6 +250,7 @@ const routes: Routes = [
     {
         path: "",
         component: DashboardComponent,
+        canActivate: [AuthGuard],
         children: [
             {
                 path: 'posts-fake',

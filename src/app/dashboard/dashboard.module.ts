@@ -5,12 +5,12 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
 import {DashboardComponent} from './dashboard.component';
 import {
     NbButtonModule,
-    NbCardModule, NbFormFieldModule,
+    NbCardModule, NbContextMenuModule, NbFormFieldModule,
     NbIconModule, NbInputModule,
     NbLayoutModule,
     NbMenuModule,
     NbSelectModule,
-    NbSidebarModule
+    NbSidebarModule, NbUserModule
 } from "@nebular/theme";
 import {BasicComponent} from './page/basic/basic.component';
 import {ItemComponent} from './page/basic/item/item.component';
@@ -61,7 +61,9 @@ import { CreateSubscribeComponent } from './manager-posts/create-subscribe/creat
         NgxPaginationModule,
         NbFormFieldModule,
         ReactiveFormsModule,
-        CKEditorModule
+        CKEditorModule,
+        NbUserModule,
+        NbContextMenuModule
     ],
 
 })
