@@ -6,7 +6,7 @@
                     <h2 class="text-white">Danh Sách <b>{{title}}</b></h2>
                 </div>
                 <div class="col-sm-6 " style="text-align: right">
-                    <button nbButton hero status="primary" (click)="openPopupCreatePost()">Tạo Bài Viết</button>
+                    <button nbButton hero status="primary" (click)="openPopupCreatePost()">Tạo {{title}}</button>
                 </div>
             </div>
         </div>
@@ -36,7 +36,12 @@
                 </th>
                 <th>Tiêu Đề</th>
                 <th>Ảnh</th>
-                <th class="text-center">Liên Kết</th>
+                <th class="text-center">
+                    <span *ngIf="post_type === 'GAME_MOBILE'"> Liên Kết ANDROID	</span>
+                    <span *ngIf="post_type !== 'GAME_MOBILE'"> Liên Kết	</span>
+                </th>
+                <th class="text-center" *ngIf="post_type === 'GAME_CARD' || post_type ==='ADS' || post_type ==='LIVESTREAM'">thứ tự</th>
+                <th class="text-center" *ngIf="post_type === 'GAME_MOBILE'" > Liên Kết IOS</th>
                 <th class="text-center">Thể Loại</th>
                 <th class="text-center">Người Tạo</th>
                 <th>Thời Gian Tạo</th>
@@ -56,6 +61,9 @@
                 <td class="text-center">
                     <a href="{{ post.link}}" target="_blank">Link</a>
                 </td>
+                <td *ngIf="this.post_type === 'GAME_CARD' || post_type ==='ADS' || post_type ==='LIVESTREAM'"> {{ post.order }}</td>
+                <td class="text-center" *ngIf="post_type === 'GAME_MOBILE'" ><a href="{{post.link_ios}}" target="_blank">Link</a></td>
+
                 <td class="text-center"> {{ post.categoryItem.category.name}}</td>
                 <td class="text-center">
                     {{post.user_created.full_name}}

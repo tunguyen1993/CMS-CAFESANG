@@ -4,6 +4,7 @@ import ApiConst from "../../core/const/api.const";
 
 @Injectable()
 export class PostService extends BaseAPIService {
+
     getPosts(post_type: string, page: number,
              search: string | undefined = "",
              categories: string | Array<any> | undefined = undefined,

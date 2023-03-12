@@ -10,7 +10,7 @@ import {NbDialogRef} from "@nebular/theme";
 })
 export class CreateLivestreamComponent implements OnInit {
 
-
+    isFullSize:any
     @Input() post: any;
     @Input() _type: string | undefined;
     @Input() fake: boolean = false;
@@ -25,6 +25,9 @@ export class CreateLivestreamComponent implements OnInit {
 
     constructor(public service: PostService,
                 @Optional() public dialog: NbDialogRef<any>) {
+        if (dialog){
+            this.isFullSize = '640px'
+        }
     }
 
     ngOnInit(): void {
@@ -124,6 +127,14 @@ export class CreateLivestreamComponent implements OnInit {
         if (this.dialog) {
             this.dialog.close(returnedObject);
         }
+    }
+
+    expand(){
+        this.isFullSize = "90vw"
+    }
+
+    collapse(){
+        this.isFullSize = "640px"
     }
 
 }

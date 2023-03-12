@@ -142,6 +142,11 @@ export class DashboardComponent implements OnInit {
                     icon: {icon: "list-outline", pack: 'eva'},
                     title: "Danh sách",
                     link: "/dashboard/notifications"
+                },
+                {
+                    icon: {icon: "list-outline", pack: 'eva'},
+                    title: "Tạo Bài Viết",
+                    link: "/dashboard/notify-create"
                 }
             ]
         },

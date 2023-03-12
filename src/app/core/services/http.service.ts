@@ -37,7 +37,13 @@ export class BaseAPIService {
     public actionPost<T>(url: string, body: object): Observable<any> {
         return this.http.post(environment.api_url + url, body)
             .pipe(
-                map((response: any) => response.data),
+                map((response: any) => {
+                    this.toastrService.show("Tạo Dữ Liệu Thành Công!",'Thành công', {
+                        position: this.positions.TOP_LEFT,
+                        status: 'success'
+                    });
+                    response.data
+                }),
             );
     }
 

@@ -10,6 +10,7 @@ import {CreateLivestreamComponent} from "./manager-posts/create-livestream/creat
 import {CreateGameMobileComponent} from "./manager-posts/create-game-mobile/create-game-mobile.component";
 import {CreateAdvertisementComponent} from "./manager-posts/create-advertisement/create-advertisement.component";
 import {CreateGameCardComponent} from "./manager-posts/create-game-card/create-game-card.component";
+import {CreateNotiComponent} from "./manager-posts/create-noti/create-noti.component";
 
 const routes: Routes = [
     {
@@ -158,7 +159,11 @@ const routes: Routes = [
                     post_type: "NOTIFY",
                     title: "Thông Báo"
                 }
-            }
+            },
+            {
+                path: "notify-create",
+                component: CreateNotiComponent,
+            },
         ]
     }
 ];

@@ -29,6 +29,7 @@ import { CreateGameCardComponent } from './manager-posts/create-game-card/create
 import { CreateAdvertisementComponent } from './manager-posts/create-advertisement/create-advertisement.component';
 import { CreateGameMobileComponent } from './manager-posts/create-game-mobile/create-game-mobile.component';
 import { CreateLivestreamComponent } from './manager-posts/create-livestream/create-livestream.component';
+import { CreateNotiComponent } from './manager-posts/create-noti/create-noti.component';
 
 @NgModule({
     declarations: [
@@ -42,7 +43,8 @@ import { CreateLivestreamComponent } from './manager-posts/create-livestream/cre
         CreateGameCardComponent,
         CreateAdvertisementComponent,
         CreateGameMobileComponent,
-        CreateLivestreamComponent
+        CreateLivestreamComponent,
+        CreateNotiComponent
     ],
     imports: [
         CommonModule,

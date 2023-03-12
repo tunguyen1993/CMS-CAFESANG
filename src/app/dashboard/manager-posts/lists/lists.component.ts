@@ -7,6 +7,7 @@ import {CreateGameCardComponent} from "../create-game-card/create-game-card.comp
 import {CreateAdvertisementComponent} from "../create-advertisement/create-advertisement.component";
 import {CreateGameMobileComponent} from "../create-game-mobile/create-game-mobile.component";
 import {CreateLivestreamComponent} from "../create-livestream/create-livestream.component";
+import {CreateNotiComponent} from "../create-noti/create-noti.component";
 
 @Component({
     selector: 'app-lists',
@@ -15,13 +16,13 @@ import {CreateLivestreamComponent} from "../create-livestream/create-livestream.
 })
 export class ListsComponent implements OnInit {
 
-
     componentWithType = {
         POST: CreateComponent,
         GAME_CARD: CreateGameCardComponent,
         ADS: CreateAdvertisementComponent,
         GAME_MOBILE: CreateGameMobileComponent,
         LIVESTREAM: CreateLivestreamComponent,
+        NOTIFY: CreateNotiComponent
     };
     posts: any = []
     page: number = 1;

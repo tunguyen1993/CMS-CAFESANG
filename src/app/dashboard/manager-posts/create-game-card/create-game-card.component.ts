@@ -10,6 +10,7 @@ import {NbDialogRef} from "@nebular/theme";
 })
 export class CreateGameCardComponent implements OnInit {
 
+    isFullSize:any
     @Input() post: any;
     @Input() _type: string | undefined;
     @Input() fake: boolean = false;
@@ -26,6 +27,9 @@ export class CreateGameCardComponent implements OnInit {
 
     constructor(public service: PostService,
                 @Optional() public dialog: NbDialogRef<any>) {
+        if (dialog){
+            this.isFullSize = '640px'
+        }
     }
 
     ngOnInit(): void {
@@ -129,5 +133,13 @@ export class CreateGameCardComponent implements OnInit {
         if (this.dialog) {
             this.dialog.close(returnedObject);
         }
+    }
+
+    expand(){
+        this.isFullSize = "90vw"
+    }
+
+    collapse(){
+        this.isFullSize = "640px"
     }
 }
