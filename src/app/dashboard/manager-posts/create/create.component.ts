@@ -2,6 +2,7 @@ import {Component, Input, OnInit, Optional} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {PostService} from "../post.service";
 import {NbDialogRef} from "@nebular/theme";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-create',
@@ -10,11 +11,12 @@ import {NbDialogRef} from "@nebular/theme";
 })
 export class CreateComponent implements OnInit {
 
-    isFullSize:any
+    isFullSize: any
     @Input() post: any;
     @Input() _type: string | undefined;
     @Input() fake: boolean = false;
 
+    is_fake: boolean = false;
 
     angForm: FormGroup = new FormGroup({
         title: new FormControl(""),
@@ -32,10 +34,12 @@ export class CreateComponent implements OnInit {
     public videoUpload: any
 
     constructor(public service: PostService,
-                @Optional() public dialog: NbDialogRef<any>) {
-        if (dialog){
+                @Optional() public dialog: NbDialogRef<any>,
+                private route: ActivatedRoute,) {
+        if (dialog) {
             this.isFullSize = '640px'
         }
+
     }
 
     ngOnInit(): void {
@@ -49,6 +53,14 @@ export class CreateComponent implements OnInit {
             })
             this.imageList = this.post.image
         }
+        this.route
+            .data
+            .subscribe((data: any) => {
+                this.is_fake = this.fake
+                if (data.fake){
+                    this.is_fake = data.fake
+                }
+            })
     }
 
     uploadVideoFile($event: any) {
@@ -104,7 +116,7 @@ export class CreateComponent implements OnInit {
                 this.service.uploadVideo(this.videoUpload)
                     .subscribe(res => {
                         data.video = res;
-                        this.service.createPost(data).subscribe(res => {
+                        this.service.createPost(data, this.is_fake).subscribe(res => {
                             this.imageList = undefined
                             this.videoUpload = undefined
                             this.imageListUpload = undefined
@@ -114,7 +126,7 @@ export class CreateComponent implements OnInit {
                 this.close()
                 return
             }
-            this.service.createPost(data).subscribe(res => {
+            this.service.createPost(data, this.is_fake).subscribe(res => {
                 this.imageList = undefined
                 this.imageListUpload = undefined
                 this.angForm.reset()
@@ -123,7 +135,7 @@ export class CreateComponent implements OnInit {
         })
     }
 
-    onUpdate(){
+    onUpdate() {
         const data = {
             ...this.angForm?.value, image: this.post.image, CategoryItemEntity: {
                 category_id: this.angForm?.value.category_id
@@ -137,14 +149,14 @@ export class CreateComponent implements OnInit {
                     this.service.uploadVideo(this.videoUpload)
                         .subscribe(res => {
                             data.video = res;
-                            this.service.updatePost(this.post.id, data).subscribe(res => {
+                            this.service.updatePost(this.post.id, data, this.is_fake).subscribe(res => {
                                 this.angForm.reset()
                             })
                         })
                     this.close()
                     return
                 }
-                this.service.updatePost(this.post.id, data).subscribe(res => {
+                this.service.updatePost(this.post.id, data, this.is_fake).subscribe(res => {
                     this.angForm.reset()
                 })
                 this.close()
@@ -155,7 +167,7 @@ export class CreateComponent implements OnInit {
             if (this.angForm?.value.video_type === 'upload' && this.videoUpload) {
                 this.service.uploadVideo(this.videoUpload)
                     .subscribe(res => {
-                        this.service.updatePost(this.post.id, data).subscribe(res => {
+                        this.service.updatePost(this.post.id, data, this.is_fake).subscribe(res => {
                             this.angForm.reset()
                         })
                     })
@@ -164,22 +176,22 @@ export class CreateComponent implements OnInit {
             }
         }
 
-        this.service.updatePost(this.post.id, data).subscribe(res => {
+        this.service.updatePost(this.post.id, data, this.is_fake).subscribe(res => {
             this.close()
         })
     }
 
     close(returnedObject = null) {
-        if (this.dialog){
+        if (this.dialog) {
             this.dialog.close(returnedObject);
         }
     }
 
-    expand(){
+    expand() {
         this.isFullSize = "90vw"
     }
 
-    collapse(){
+    collapse() {
         this.isFullSize = "640px"
     }
 }

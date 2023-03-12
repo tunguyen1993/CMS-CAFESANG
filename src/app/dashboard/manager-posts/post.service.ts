@@ -10,7 +10,8 @@ export class PostService extends BaseAPIService {
              categories: string | Array<any> | undefined = undefined,
              sort_by: string = "id",
              order_by: "DESC" | "ASC" = "DESC",
-             limit: number = 10) {
+             limit: number = 10,
+             fake: boolean = false) {
         let category = ""
         if (categories && typeof categories !== "string") {
             categories.map(cat => {
@@ -19,20 +20,20 @@ export class PostService extends BaseAPIService {
 
         }
         const TYPE_API = `GET_LIST_BY_TYPE_${post_type}`
-        return this.actionGet(`${ApiConst[TYPE_API]}?page=${page}&limit=${limit}&search=${search}&sort_by=${sort_by}&order_by=${order_by}${category}`)
+        return this.actionGet(`${ApiConst[TYPE_API]}?page=${page}&limit=${limit}&search=${search}&sort_by=${sort_by}&order_by=${order_by}${category}&fake=${fake ? "fake" : ""}`)
     }
 
-    updatePost(postId: number, data: Object) {
-        return this.actionPut(`${ApiConst["ACTION_POST"]}/${postId}`, data)
+    updatePost(postId: number, data: Object, fake: boolean = false) {
+        return this.actionPut(`${ApiConst["ACTION_POST"]}/${postId}?fake=${fake ? "fake" : ""}`, data)
     }
 
-    removePost(post_type: string, postId: number) {
+    removePost(post_type: string, postId: number, fake: boolean = false) {
         const TYPE_API = `ACTION_${post_type}`
-        return this.actionDelete(`${ApiConst[TYPE_API]}/${postId}`)
+        return this.actionDelete(`${ApiConst[TYPE_API]}/${postId}?fake=${fake ? "fake" : ""}`)
     }
 
-    createPost(data) {
-        return this.actionPost(`/admin/post/create-post`, data)
+    createPost(data, fake: boolean = false) {
+        return this.actionPost(`/admin/post/create-post?fake=${fake ? "fake" : ""}`, data)
     }
 
     uploadImageFile(file: File) {

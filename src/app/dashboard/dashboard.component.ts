@@ -100,6 +100,16 @@ export class DashboardComponent implements OnInit {
                     icon: {icon: "list-outline", pack: 'eva'},
                     title: "Tạo Bài Viết",
                     link: "/dashboard/post-create"
+                },
+                {
+                    icon: {icon: "list-outline", pack: 'eva'},
+                    title: "Danh sách fake",
+                    link: "/dashboard/posts-fake"
+                },
+                {
+                    icon: {icon: "list-outline", pack: 'eva'},
+                    title: "Tạo Bài Viết fake",
+                    link: "/dashboard/post-create-fake"
                 }
             ]
         },
@@ -116,6 +126,16 @@ export class DashboardComponent implements OnInit {
                     icon: {icon: "list-outline", pack: 'eva'},
                     title: "Tạo Bài Viết",
                     link: "/dashboard/game-card-create"
+                },
+                {
+                    icon: {icon: "list-outline", pack: 'eva'},
+                    title: "Danh sách fake",
+                    link: "/dashboard/game-cards-fake"
+                },
+                {
+                    icon: {icon: "list-outline", pack: 'eva'},
+                    title: "Tạo Bài Viết fake",
+                    link: "/dashboard/game-card-create-fake"
                 }
             ]
         },
@@ -132,6 +152,16 @@ export class DashboardComponent implements OnInit {
                     icon: {icon: "list-outline", pack: 'eva'},
                     title: "Tạo Bài Viết",
                     link: "/dashboard/advertisement-create"
+                },
+                {
+                    icon: {icon: "list-outline", pack: 'eva'},
+                    title: "Danh sách fake",
+                    link: "/dashboard/advertisements-fake"
+                },
+                {
+                    icon: {icon: "list-outline", pack: 'eva'},
+                    title: "Tạo Bài Viết fake",
+                    link: "/dashboard/advertisement-create-fake"
                 }
             ]
         },
@@ -149,6 +179,16 @@ export class DashboardComponent implements OnInit {
                     icon: {icon: "list-outline", pack: 'eva'},
                     title: "Tạo Bài Viết",
                     link: "/dashboard/game-mobile-create"
+                },
+                {
+                    icon: {icon: "list-outline", pack: 'eva'},
+                    title: "Danh sách fake",
+                    link: "/dashboard/games-mobile-fake"
+                },
+                {
+                    icon: {icon: "list-outline", pack: 'eva'},
+                    title: "Tạo Bài Viết fake",
+                    link: "/dashboard/game-mobile-create-fake"
                 }
             ]
         },
@@ -165,6 +205,16 @@ export class DashboardComponent implements OnInit {
                     icon: {icon: "list-outline", pack: 'eva'},
                     title: "Tạo Bài Viết",
                     link: "/dashboard/livestream-create"
+                },
+                {
+                    icon: {icon: "list-outline", pack: 'eva'},
+                    title: "Danh sách fake",
+                    link: "/dashboard/livestreams-fake"
+                },
+                {
+                    icon: {icon: "list-outline", pack: 'eva'},
+                    title: "Tạo Bài Viết fake",
+                    link: "/dashboard/livestream-create-fake"
                 }
             ]
         },

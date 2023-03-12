@@ -2,6 +2,7 @@ import {Component, Input, OnInit, Optional} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PostService} from "../post.service";
 import {NbDialogRef} from "@nebular/theme";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-create-game-card',
@@ -14,6 +15,7 @@ export class CreateGameCardComponent implements OnInit {
     @Input() post: any;
     @Input() _type: string | undefined;
     @Input() fake: boolean = false;
+    is_fake: boolean = false;
     angForm: FormGroup = new FormGroup({
         title: new FormControl('', [Validators.required]),
         image: new FormControl(""),
@@ -26,7 +28,8 @@ export class CreateGameCardComponent implements OnInit {
     public imageList: any;
 
     constructor(public service: PostService,
-                @Optional() public dialog: NbDialogRef<any>) {
+                @Optional() public dialog: NbDialogRef<any>,
+                private route: ActivatedRoute) {
         if (dialog){
             this.isFullSize = '640px'
         }
@@ -42,6 +45,14 @@ export class CreateGameCardComponent implements OnInit {
             })
             this.imageList = this.post.image
         }
+        this.route
+            .data
+            .subscribe((data: any) => {
+                this.is_fake = this.fake
+                if (data.fake){
+                    this.is_fake = data.fake
+                }
+            })
     }
 
 
@@ -89,7 +100,7 @@ export class CreateGameCardComponent implements OnInit {
             data.title = this.angForm.value.title;
             data.promotion = this.angForm.value.promotion;
             data.pricing = this.angForm.value.pricing;
-            this.service.createPost(data)
+            this.service.createPost(data, this.is_fake)
                 .subscribe(res => {
                     this.imageList = undefined;
                     this.imageListUpload = undefined
@@ -109,7 +120,7 @@ export class CreateGameCardComponent implements OnInit {
         }
         if (this.imageListUpload) {
             this.service.uploadImageFile(this.imageListUpload).subscribe(res => {
-                this.service.updatePost(this.post.id, data)
+                this.service.updatePost(this.post.id, data, this.is_fake)
                     .subscribe(res => {
                         this.imageList = undefined;
                         this.imageListUpload = undefined
@@ -119,7 +130,7 @@ export class CreateGameCardComponent implements OnInit {
                 return
             })
         }
-        this.service.updatePost(this.post.id, data)
+        this.service.updatePost(this.post.id, data, this.is_fake)
             .subscribe(res => {
                 this.imageList = undefined;
                 this.imageListUpload = undefined

@@ -2,6 +2,7 @@ import {Component, Input, OnInit, Optional} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PostService} from "../post.service";
 import {NbDialogRef} from "@nebular/theme";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-create-advertisement',
@@ -15,6 +16,9 @@ export class CreateAdvertisementComponent implements OnInit {
     @Input() post: any;
     @Input() _type: string | undefined;
     @Input() fake: boolean = false;
+
+    is_fake: boolean = false;
+
     angForm: FormGroup = new FormGroup({
         title: new FormControl('', [Validators.required]),
         image: new FormControl(""),
@@ -26,7 +30,8 @@ export class CreateAdvertisementComponent implements OnInit {
     public imageList: any;
 
     constructor(public service: PostService,
-                @Optional() public dialog: NbDialogRef<any>) {
+                @Optional() public dialog: NbDialogRef<any>,
+                private route: ActivatedRoute) {
         if (dialog){
             this.isFullSize = '640px'
         }
@@ -41,6 +46,14 @@ export class CreateAdvertisementComponent implements OnInit {
             })
             this.imageList = this.post.image
         }
+        this.route
+            .data
+            .subscribe((data: any) => {
+                this.is_fake = this.fake
+                if (data.fake){
+                    this.is_fake = data.fake
+                }
+            })
     }
 
 
@@ -87,7 +100,7 @@ export class CreateAdvertisementComponent implements OnInit {
             data.image = res;
             data.link = this.angForm.value.link;
             data.title = this.angForm.value.title;
-            this.service.createPost(data)
+            this.service.createPost(data, this.is_fake)
                 .subscribe(res => {
                     this.close()
                     this.imageList = undefined;
@@ -107,7 +120,7 @@ export class CreateAdvertisementComponent implements OnInit {
         if (this.imageListUpload){
             this.service.uploadImageFile(this.imageListUpload).subscribe(res => {
                 data.image = res;
-                this.service.updatePost(this.post.id, data).subscribe(res => {
+                this.service.updatePost(this.post.id, data, this.is_fake).subscribe(res => {
                     this.close()
                     this.imageList = undefined;
                     this.imageListUpload = undefined
@@ -116,7 +129,7 @@ export class CreateAdvertisementComponent implements OnInit {
                 return
             })
         }
-        this.service.updatePost(this.post.id, data).subscribe(res => {
+        this.service.updatePost(this.post.id, data, this.is_fake).subscribe(res => {
             this.close()
             this.imageList = undefined;
             this.imageListUpload = undefined

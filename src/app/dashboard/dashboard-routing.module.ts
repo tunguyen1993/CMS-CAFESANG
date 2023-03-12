@@ -134,10 +134,10 @@ const routes: Routes = [
         path: "",
         component: DashboardComponent,
         children: [
-          {
-            path: 'settings',
-            component: SettingsComponent,
-          }
+            {
+                path: 'settings',
+                component: SettingsComponent,
+            }
         ]
     },
     {
@@ -225,6 +225,82 @@ const routes: Routes = [
             {
                 path: "notify-create",
                 component: CreateNotiComponent,
+            },
+        ]
+    },
+    {
+        path: "",
+        component: DashboardComponent,
+        children: [
+            {
+                path: 'posts-fake',
+                component: ListsComponent,
+                data: {
+                    post_type: "POST",
+                    title: "Bài Viết",
+                    fake: true
+                }
+            },
+            {
+                path: "post-create-fake",
+                component: CreateComponent,
+                data: {fake: true}
+            },
+            {
+                path: 'game-cards-fake',
+                component: ListsComponent,
+                data: {
+                    post_type: "GAME_CARD",
+                    title: "Thẻ Trò Chơi",
+                    fake: true
+                }
+            },
+            {
+                path: "game-card-create-fake",
+                component: CreateGameCardComponent,
+                data: {fake: true}
+            },
+            {
+                path: 'advertisements-fake',
+                component: ListsComponent,
+                data: {
+                    post_type: "ADS",
+                    title: "Quảng Cáo",
+                    fake: true
+                }
+            },
+            {
+                path: "advertisement-create-fake",
+                component: CreateAdvertisementComponent,
+                data: {fake: true}
+            },
+            {
+                path: 'games-mobile-fake',
+                component: ListsComponent,
+                data: {
+                    post_type: "GAME_MOBILE",
+                    title: "Game Mobile",
+                    fake: true
+                }
+            },
+            {
+                path: "game-mobile-create-fake",
+                component: CreateGameMobileComponent,
+                data: {fake: true}
+            },
+            {
+                path: 'livestreams-fake',
+                component: ListsComponent,
+                data: {
+                    post_type: "LIVESTREAM",
+                    title: "Livestreams",
+                    fake: true
+                }
+            },
+            {
+                path: "livestream-create-fake",
+                component: CreateLivestreamComponent,
+                data: {fake: true}
             },
         ]
     }

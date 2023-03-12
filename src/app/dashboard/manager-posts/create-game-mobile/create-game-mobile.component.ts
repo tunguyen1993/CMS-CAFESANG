@@ -2,6 +2,7 @@ import {Component, Input, OnInit, Optional} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PostService} from "../post.service";
 import {NbDialogRef} from "@nebular/theme";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-create-game-mobile',
@@ -15,6 +16,7 @@ export class CreateGameMobileComponent implements OnInit {
     @Input() post: any;
     @Input() _type: string | undefined;
     @Input() fake: boolean = false;
+    is_fake: boolean = false;
 
     angForm: FormGroup = new FormGroup({
         title: new FormControl('', [Validators.required]),
@@ -28,7 +30,8 @@ export class CreateGameMobileComponent implements OnInit {
     public imageList: any;
 
     constructor(public service: PostService,
-                @Optional() public dialog: NbDialogRef<any>) {
+                @Optional() public dialog: NbDialogRef<any>,
+                private route: ActivatedRoute) {
         if (dialog){
             this.isFullSize = '640px'
         }
@@ -45,6 +48,14 @@ export class CreateGameMobileComponent implements OnInit {
             })
             this.imageList = this.post.image
         }
+        this.route
+            .data
+            .subscribe((data: any) => {
+                this.is_fake = this.fake
+                if (data.fake){
+                    this.is_fake = data.fake
+                }
+            })
     }
 
 
@@ -92,7 +103,7 @@ export class CreateGameMobileComponent implements OnInit {
             data.link = this.angForm.value.link;
             data.title = this.angForm.value.title;
             data.link_ios = this.angForm.value.link_ios;
-            this.service.createPost(data)
+            this.service.createPost(data, this.is_fake)
                 .subscribe(res => {
                     this.imageList = undefined;
                     this.imageListUpload = undefined
@@ -111,14 +122,14 @@ export class CreateGameMobileComponent implements OnInit {
         if (this.imageListUpload){
             this.service.uploadImageFile(this.imageListUpload).subscribe(res => {
                 data.image = res;
-                this.service.updatePost(this.post.id,data)
+                this.service.updatePost(this.post.id,data, this.is_fake)
                     .subscribe(res => {
                         this.close()
                     })
             })
             return
         }
-        this.service.updatePost(this.post.id,data)
+        this.service.updatePost(this.post.id,data, this.is_fake)
             .subscribe(res => {
                 this.close()
             })

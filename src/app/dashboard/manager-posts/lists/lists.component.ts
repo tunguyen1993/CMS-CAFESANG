@@ -33,7 +33,8 @@ export class ListsComponent implements OnInit {
     keyword: string = "";
     categories: any = undefined;
     post_type: any;
-    title: string | null = null
+    title: string | null = null;
+    fake: boolean = false
 
     constructor(private service: PostService,
                 private route: ActivatedRoute,
@@ -46,6 +47,7 @@ export class ListsComponent implements OnInit {
         this.route
             .data
             .subscribe((data: any) => {
+                this.fake = data.fake
                 this.title = data.title
                 this.post_type = data.post_type
             })
@@ -56,7 +58,7 @@ export class ListsComponent implements OnInit {
     }
 
     getPosts() {
-        this.service.getPosts(this.post_type ?? "", this.page, this.keyword, this.categories).subscribe(res => {
+        this.service.getPosts(this.post_type ?? "", this.page, this.keyword, this.categories, "id", "DESC", 15, this.fake).subscribe(res => {
             this.posts = res.data;
             this.totalPage = res.total_page;
             this.totalRecord = res.totalRecord;
@@ -67,21 +69,21 @@ export class ListsComponent implements OnInit {
     changeStatusPost(status: "DISABLE" | "ENABLE", postId: number, indexReplace: number) {
         this.service.updatePost(postId, {
             status
-        }).subscribe(res => {
+        }, this.fake).subscribe(res => {
             this.posts[indexReplace].status = status;
         })
     }
 
     removePost(postId: number, postTitle: string) {
         if (confirm("Bạn có chắc chắn muốn xóa bài viết " + postTitle + " không?")) {
-            this.service.removePost(this.post_type ?? "", postId).subscribe(res => {
+            this.service.removePost(this.post_type ?? "", postId, this.fake).subscribe(res => {
                 this.getPosts()
             })
         }
     }
 
     openPopupCreatePost() {
-        this.dialogService.open(this.componentWithType[this.post_type], {closeOnBackdropClick: true})
+        this.dialogService.open(this.componentWithType[this.post_type], {closeOnBackdropClick: true, context: {fake: true}})
             .onClose
             .subscribe({
                 next: () => {
@@ -96,7 +98,7 @@ export class ListsComponent implements OnInit {
         this.dialogService.open(this.componentWithType[this.post_type], {
             closeOnBackdropClick: true, context: {
                 _type: "update",
-                fake: false,
+                fake: this.fake,
                 post
             }
         })
