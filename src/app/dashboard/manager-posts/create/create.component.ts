@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Optional} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {PostService} from "../post.service";
+import {NbDialogRef} from "@nebular/theme";
 
 @Component({
     selector: 'app-create',
@@ -8,13 +9,19 @@ import {PostService} from "../post.service";
     styleUrls: ['./create.component.scss']
 })
 export class CreateComponent implements OnInit {
+
+    @Input() post: any;
+    @Input() _type: string | undefined;
+    @Input() fake: boolean = false;
+
+
     angForm: FormGroup = new FormGroup({
-        title: new FormControl('', [Validators.required]),
-        category_id: new FormControl('', [Validators.required]),
+        title: new FormControl(""),
+        category_id: new FormControl("13"),
         type: new FormControl("DEFAULT"),
         image: new FormControl(""),
         link: new FormControl(""),
-        content: new FormControl("", [Validators.required]),
+        content: new FormControl(""),
         video: new FormControl(""),
         video_type: new FormControl(""),
     });
@@ -23,11 +30,22 @@ export class CreateComponent implements OnInit {
     public imageList: any;
     public videoUpload: any
 
-    constructor(public service: PostService) {
+    constructor(public service: PostService,
+                @Optional() public dialog: NbDialogRef<any>) {
+
     }
 
     ngOnInit(): void {
-
+        if (this._type === "update") {
+            this.angForm.patchValue({
+                title: this.post.title,
+                content: this.post.content,
+                link: this.post.link,
+                category_id: this.post.categoryItem.category_id,
+                type: this.post.type,
+            })
+            this.imageList = this.post.image
+        }
     }
 
     uploadVideoFile($event: any) {
@@ -75,7 +93,8 @@ export class CreateComponent implements OnInit {
             const data = {
                 ...this.angForm?.value, image: res, CategoryItemEntity: {
                     category_id: this.angForm?.value.category_id
-                }, category_id: undefined
+                }, category_id: undefined,
+                type: "DEFAULT"
             }
             delete data.category_id;
             if (this.angForm?.value.video_type === 'upload') {
@@ -89,14 +108,67 @@ export class CreateComponent implements OnInit {
                             this.angForm.reset()
                         })
                     })
+                this.close()
                 return
             }
             this.service.createPost(data).subscribe(res => {
                 this.imageList = undefined
                 this.imageListUpload = undefined
                 this.angForm.reset()
+                this.close()
             })
         })
     }
 
+    onUpdate(){
+        const data = {
+            ...this.angForm?.value, image: this.post.image, CategoryItemEntity: {
+                category_id: this.angForm?.value.category_id
+            }, category_id: undefined,
+            type: "DEFAULT"
+        }
+        if (this.imageListUpload) {
+            this.service.uploadImageFile(this.imageListUpload).subscribe(res => {
+                delete data.category_id;
+                if (this.angForm?.value.video_type === 'upload' && this.videoUpload) {
+                    this.service.uploadVideo(this.videoUpload)
+                        .subscribe(res => {
+                            data.video = res;
+                            this.service.updatePost(this.post.id, data).subscribe(res => {
+                                this.angForm.reset()
+                            })
+                        })
+                    this.close()
+                    return
+                }
+                this.service.updatePost(this.post.id, data).subscribe(res => {
+                    this.angForm.reset()
+                })
+                this.close()
+                return;
+            })
+        }
+        if (this.videoUpload) {
+            if (this.angForm?.value.video_type === 'upload' && this.videoUpload) {
+                this.service.uploadVideo(this.videoUpload)
+                    .subscribe(res => {
+                        this.service.updatePost(this.post.id, data).subscribe(res => {
+                            this.angForm.reset()
+                        })
+                    })
+                this.close()
+                return
+            }
+        }
+
+        this.service.updatePost(this.post.id, data).subscribe(res => {
+            this.close()
+        })
+    }
+
+    close(returnedObject = null) {
+        if (this.dialog){
+            this.dialog.close(returnedObject);
+        }
+    }
 }

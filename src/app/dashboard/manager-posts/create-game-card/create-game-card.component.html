@@ -1,7 +1,7 @@
 <nb-card>
     <nb-card-header>Tạo Thẻ Game</nb-card-header>
     <nb-card-body>
-        <form [formGroup]="angForm" novalidate (ngSubmit)="onSubmit()">
+        <form [formGroup]="angForm" novalidate (ngSubmit)="_type !== 'update' ?  onSubmit() : onUpdate()">
             <div class="form-group mb-4">
                 <label class="center-block w-100">
                     <div class="mb-3 text-capitalize"><b>Tên Bài Viết:</b></div>
@@ -22,7 +22,7 @@
                     <div class="col-md-3"  style="position: relative">
                         <nb-icon icon="close-outline" class="remove-image position-absolute" (click)="removeImage()"></nb-icon>
                         <img src="{{ imageList.image }}" alt=""
-                             style="border-radius: 10px; height: 86px; width: 86px ; object-fit: cover">
+                             style="border-radius: 10px; height: 86px; width: 86px ; object-fit: cover; border: 1px solid">
                     </div>
                 </ng-container>
                 <div *ngIf="angForm.controls['image'].invalid && (angForm.controls['image'].dirty || angForm.controls['image'].touched)">

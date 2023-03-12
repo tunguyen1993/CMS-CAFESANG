@@ -1,6 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {PostService} from "../post.service";
 import {ActivatedRoute} from "@angular/router";
+import {NbDialogService} from "@nebular/theme";
+import {CreateComponent} from "../create/create.component";
+import {CreateGameCardComponent} from "../create-game-card/create-game-card.component";
+import {CreateAdvertisementComponent} from "../create-advertisement/create-advertisement.component";
+import {CreateGameMobileComponent} from "../create-game-mobile/create-game-mobile.component";
+import {CreateLivestreamComponent} from "../create-livestream/create-livestream.component";
 
 @Component({
     selector: 'app-lists',
@@ -9,6 +15,14 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class ListsComponent implements OnInit {
 
+
+    componentWithType = {
+        POST: CreateComponent,
+        GAME_CARD: CreateGameCardComponent,
+        ADS: CreateAdvertisementComponent,
+        GAME_MOBILE: CreateGameMobileComponent,
+        LIVESTREAM: CreateLivestreamComponent,
+    };
     posts: any = []
     page: number = 1;
     totalPage: number = 0;
@@ -17,10 +31,12 @@ export class ListsComponent implements OnInit {
     currentPage: number = 1;
     keyword: string = "";
     categories: any = undefined;
-    post_type: string | null = null
+    post_type: any;
     title: string | null = null
+
     constructor(private service: PostService,
-                private route: ActivatedRoute) {
+                private route: ActivatedRoute,
+                private dialogService: NbDialogService) {
         this.route.queryParams
             .subscribe(params => {
                     this.page = params['page'] ?? 1
@@ -39,7 +55,7 @@ export class ListsComponent implements OnInit {
     }
 
     getPosts() {
-        this.service.getPosts(this.post_type ?? "",this.page, this.keyword, this.categories).subscribe(res => {
+        this.service.getPosts(this.post_type ?? "", this.page, this.keyword, this.categories).subscribe(res => {
             this.posts = res.data;
             this.totalPage = res.total_page;
             this.totalRecord = res.totalRecord;
@@ -48,7 +64,7 @@ export class ListsComponent implements OnInit {
     }
 
     changeStatusPost(status: "DISABLE" | "ENABLE", postId: number, indexReplace: number) {
-        this.service.updatePost(this.post_type ?? "",postId, {
+        this.service.updatePost(postId, {
             status
         }).subscribe(res => {
             this.posts[indexReplace].status = status;
@@ -56,10 +72,39 @@ export class ListsComponent implements OnInit {
     }
 
     removePost(postId: number, postTitle: string) {
-        if (confirm("Bạn có chắc chắn muốn xóa bài viết " + postTitle + "không?")) {
-            this.service.removePost(this.post_type ?? "",postId).subscribe(res => {
+        if (confirm("Bạn có chắc chắn muốn xóa bài viết " + postTitle + " không?")) {
+            this.service.removePost(this.post_type ?? "", postId).subscribe(res => {
                 this.getPosts()
             })
         }
+    }
+
+    openPopupCreatePost() {
+        this.dialogService.open(this.componentWithType[this.post_type], {closeOnBackdropClick: true})
+            .onClose
+            .subscribe({
+                next: () => {
+                    this.getPosts()
+                },
+                error: (err) => console.error(`Observer got an error: ${err}`),
+            })
+    }
+
+    onUpdate(post) {
+        console.log(post)
+        this.dialogService.open(this.componentWithType[this.post_type], {
+            closeOnBackdropClick: true, context: {
+                _type: "update",
+                fake: false,
+                post
+            }
+        })
+            .onClose
+            .subscribe({
+                next: () => {
+                    this.getPosts()
+                },
+                error: (err) => console.error(`Observer got an error: ${err}`),
+            })
     }
 }

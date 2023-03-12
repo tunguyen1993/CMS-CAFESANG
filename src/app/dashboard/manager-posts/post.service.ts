@@ -21,25 +21,24 @@ export class PostService extends BaseAPIService {
         return this.actionGet(`${ApiConst[TYPE_API]}?page=${page}&limit=${limit}&search=${search}&sort_by=${sort_by}&order_by=${order_by}${category}`)
     }
 
-    updatePost(post_type: string,postId: number, data: Object) {
-        const TYPE_API = `ACTION_POST`
-        return this.actionPut(`${ApiConst[TYPE_API]}/${postId}`, data)
+    updatePost(postId: number, data: Object) {
+        return this.actionPut(`${ApiConst["ACTION_POST"]}/${postId}`, data)
     }
 
-    removePost(post_type: string,postId: number) {
+    removePost(post_type: string, postId: number) {
         const TYPE_API = `ACTION_${post_type}`
         return this.actionDelete(`${ApiConst[TYPE_API]}/${postId}`)
     }
 
-    createPost(data){
+    createPost(data) {
         return this.actionPost(`/admin/post/create-post`, data)
     }
 
-    uploadImageFile (file: File) {
+    uploadImageFile(file: File) {
         return this.uploadFile(`/upload-file/upload-single-image`, file)
     }
 
-    uploadVideo(file: File){
+    uploadVideo(file: File) {
         return this.uploadFile(`/upload-file/upload-video`, file)
     }
 }

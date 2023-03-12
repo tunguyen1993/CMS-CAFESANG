@@ -61,12 +61,7 @@ import { CreateLivestreamComponent } from './manager-posts/create-livestream/cre
         ReactiveFormsModule,
         CKEditorModule
     ],
-    providers:[
-        PageService,
-        SettingsService,
-        AccountsService,
-        PostService
-    ]
+
 })
 export class DashboardModule {
 }

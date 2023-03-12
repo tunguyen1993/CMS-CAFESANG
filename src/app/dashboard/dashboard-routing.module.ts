@@ -6,6 +6,10 @@ import {SettingsComponent} from "./settings/settings.component";
 import {AccountsComponent} from "./accounts/accounts.component";
 import {ListsComponent} from "./manager-posts/lists/lists.component";
 import {CreateComponent} from "./manager-posts/create/create.component";
+import {CreateLivestreamComponent} from "./manager-posts/create-livestream/create-livestream.component";
+import {CreateGameMobileComponent} from "./manager-posts/create-game-mobile/create-game-mobile.component";
+import {CreateAdvertisementComponent} from "./manager-posts/create-advertisement/create-advertisement.component";
+import {CreateGameCardComponent} from "./manager-posts/create-game-card/create-game-card.component";
 
 const routes: Routes = [
     {
@@ -97,7 +101,7 @@ const routes: Routes = [
             },
             {
                 path: "post-create",
-                component: CreateComponent
+                component: CreateComponent,
             },
             {
                 path: 'game-cards',
@@ -108,12 +112,20 @@ const routes: Routes = [
                 }
             },
             {
+                path: "game-card-create",
+                component: CreateGameCardComponent,
+            },
+            {
                 path: 'advertisements',
                 component: ListsComponent,
                 data: {
                     post_type: "ADS",
                     title: "Quảng Cáo"
                 }
+            },
+            {
+                path: "advertisement-create",
+                component: CreateAdvertisementComponent,
             },
             {
                 path: 'games-mobile',
@@ -124,12 +136,20 @@ const routes: Routes = [
                 }
             },
             {
+                path: "game-mobile-create",
+                component: CreateGameMobileComponent,
+            },
+            {
                 path: 'livestreams',
                 component: ListsComponent,
                 data: {
                     post_type: "LIVESTREAM",
                     title: "Livestreams"
                 }
+            },
+            {
+                path: "livestream-create",
+                component: CreateLivestreamComponent,
             },
             {
                 path: 'notifications',

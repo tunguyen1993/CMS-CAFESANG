@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Optional} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PostService} from "../post.service";
+import {NbDialogRef} from "@nebular/theme";
 
 @Component({
     selector: 'app-create-game-card',
@@ -8,6 +9,10 @@ import {PostService} from "../post.service";
     styleUrls: ['./create-game-card.component.scss']
 })
 export class CreateGameCardComponent implements OnInit {
+
+    @Input() post: any;
+    @Input() _type: string | undefined;
+    @Input() fake: boolean = false;
     angForm: FormGroup = new FormGroup({
         title: new FormControl('', [Validators.required]),
         image: new FormControl(""),
@@ -19,10 +24,20 @@ export class CreateGameCardComponent implements OnInit {
     public imageListUpload: any;
     public imageList: any;
 
-    constructor(public service: PostService) {
+    constructor(public service: PostService,
+                @Optional() public dialog: NbDialogRef<any>) {
     }
 
     ngOnInit(): void {
+        if (this._type === "update") {
+            this.angForm.patchValue({
+                title: this.post.title,
+                link: this.post.link,
+                pricing: this.post.pricing,
+                promotion: this.post.promotion
+            })
+            this.imageList = this.post.image
+        }
     }
 
 
@@ -75,8 +90,44 @@ export class CreateGameCardComponent implements OnInit {
                     this.imageList = undefined;
                     this.imageListUpload = undefined
                     this.angForm.reset()
+                    this.close()
                 })
         })
     }
 
+
+    onUpdate() {
+        let data: any = {
+            link: this.angForm.value.link,
+            title: this.angForm.value.title,
+            promotion: this.angForm.value.promotion,
+            pricing: this.angForm.value.pricing
+        }
+        if (this.imageListUpload) {
+            this.service.uploadImageFile(this.imageListUpload).subscribe(res => {
+                this.service.updatePost(this.post.id, data)
+                    .subscribe(res => {
+                        this.imageList = undefined;
+                        this.imageListUpload = undefined
+                        this.angForm.reset()
+                        this.close()
+                    })
+                return
+            })
+        }
+        this.service.updatePost(this.post.id, data)
+            .subscribe(res => {
+                this.imageList = undefined;
+                this.imageListUpload = undefined
+                this.angForm.reset()
+                this.close()
+            })
+        return
+    }
+
+    close(returnedObject = null) {
+        if (this.dialog) {
+            this.dialog.close(returnedObject);
+        }
+    }
 }

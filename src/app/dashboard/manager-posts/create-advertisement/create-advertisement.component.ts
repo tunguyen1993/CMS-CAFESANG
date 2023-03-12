@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Optional} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PostService} from "../post.service";
+import {NbDialogRef} from "@nebular/theme";
 
 @Component({
     selector: 'app-create-advertisement',
@@ -9,19 +10,32 @@ import {PostService} from "../post.service";
 })
 export class CreateAdvertisementComponent implements OnInit {
 
+    @Input() post: any;
+    @Input() _type: string | undefined;
+    @Input() fake: boolean = false;
     angForm: FormGroup = new FormGroup({
         title: new FormControl('', [Validators.required]),
         image: new FormControl(""),
         link: new FormControl(""),
+        order: new FormControl(""),
     });
 
     public imageListUpload: any;
     public imageList: any;
 
-    constructor(public service: PostService) {
+    constructor(public service: PostService,
+                @Optional() public dialog: NbDialogRef<any>) {
     }
 
     ngOnInit(): void {
+        if (this._type === "update") {
+            this.angForm.patchValue({
+                title: this.post.title,
+                link: this.post.link,
+                order: this.post.order
+            })
+            this.imageList = this.post.image
+        }
     }
 
 
@@ -70,10 +84,44 @@ export class CreateAdvertisementComponent implements OnInit {
             data.title = this.angForm.value.title;
             this.service.createPost(data)
                 .subscribe(res => {
+                    this.close()
                     this.imageList = undefined;
                     this.imageListUpload = undefined
                     this.angForm.reset()
                 })
         })
+    }
+
+    onUpdate(){
+        let data: any = {
+            order: this.angForm.value.order,
+            link: this.angForm.value.link,
+            title: this.angForm.value.title
+        }
+
+        if (this.imageListUpload){
+            this.service.uploadImageFile(this.imageListUpload).subscribe(res => {
+                data.image = res;
+                this.service.updatePost(this.post.id, data).subscribe(res => {
+                    this.close()
+                    this.imageList = undefined;
+                    this.imageListUpload = undefined
+                    this.angForm.reset()
+                })
+                return
+            })
+        }
+        this.service.updatePost(this.post.id, data).subscribe(res => {
+            this.close()
+            this.imageList = undefined;
+            this.imageListUpload = undefined
+            this.angForm.reset()
+        })
+    }
+
+    close(returnedObject = null) {
+        if (this.dialog){
+            this.dialog.close(returnedObject);
+        }
     }
 }

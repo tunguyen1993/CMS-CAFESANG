@@ -16,7 +16,7 @@ import {AuthModule} from "./auth/auth.module";
 import {
   NB_TIME_PICKER_CONFIG,
   NbDatepickerModule,
-  NbDialogModule, NbIconModule, NbLayoutModule, NbMenuModule,
+  NbDialogModule, NbDialogRef, NbIconModule, NbLayoutModule, NbMenuModule,
   NbSidebarModule,
   NbThemeModule, NbToastrModule
 } from "@nebular/theme";
@@ -24,6 +24,10 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {CurrencyPipe} from "@angular/common";
 import {NbEvaIconsModule} from "@nebular/eva-icons";
 import {NgxPaginationModule} from "ngx-pagination";
+import {PageService} from "./dashboard/page/page.service";
+import {SettingsService} from "./dashboard/settings/settings.service";
+import {AccountsService} from "./dashboard/accounts/accounts.service";
+import {PostService} from "./dashboard/manager-posts/post.service";
 
 @NgModule({
   declarations: [
@@ -48,7 +52,8 @@ import {NgxPaginationModule} from "ngx-pagination";
     NbMenuModule,
     NbLayoutModule,
     NbToastrModule.forRoot(),
-    NgxPaginationModule
+    NgxPaginationModule,
+    NbDialogModule.forRoot(),
   ],
   providers: [
     CurrencyPipe,
@@ -62,7 +67,11 @@ import {NgxPaginationModule} from "ngx-pagination";
     {
       provide:NB_TIME_PICKER_CONFIG,
       useValue:{}
-    }
+    },
+    PageService,
+    SettingsService,
+    AccountsService,
+    PostService,
   ],
   bootstrap: [AppComponent]
 })

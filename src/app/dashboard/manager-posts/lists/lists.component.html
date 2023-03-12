@@ -5,7 +5,8 @@
                 <div class="col-sm-6">
                     <h2 class="text-white">Danh Sách <b>{{title}}</b></h2>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6 " style="text-align: right">
+                    <button nbButton hero status="primary" (click)="openPopupCreatePost()">Tạo Bài Viết</button>
                 </div>
             </div>
         </div>
@@ -79,7 +80,7 @@
                     <button nbButton size="small" outline status="info" style="margin-right: 5px">
                         <nb-icon icon="alert-circle-outline"></nb-icon>
                     </button>
-                    <button nbButton size="small" outline status="primary" style="margin-right: 5px">
+                    <button nbButton size="small" outline status="primary" style="margin-right: 5px"  (click)="onUpdate(post)" >
                         <nb-icon icon="edit-outline"></nb-icon>
                     </button>
                     <button nbButton size="small" outline status="danger">
