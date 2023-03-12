@@ -8,6 +8,7 @@ import {CreateAdvertisementComponent} from "../create-advertisement/create-adver
 import {CreateGameMobileComponent} from "../create-game-mobile/create-game-mobile.component";
 import {CreateLivestreamComponent} from "../create-livestream/create-livestream.component";
 import {CreateNotiComponent} from "../create-noti/create-noti.component";
+import {CreateSubscribeComponent} from "../create-subscribe/create-subscribe.component";
 
 @Component({
     selector: 'app-lists',
@@ -22,7 +23,8 @@ export class ListsComponent implements OnInit {
         ADS: CreateAdvertisementComponent,
         GAME_MOBILE: CreateGameMobileComponent,
         LIVESTREAM: CreateLivestreamComponent,
-        NOTIFY: CreateNotiComponent
+        NOTIFY: CreateNotiComponent,
+        subscribe: CreateSubscribeComponent
     };
     posts: any = []
     page: number = 1;

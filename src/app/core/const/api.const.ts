@@ -24,6 +24,7 @@ const ApiConst: any = {
  ACTION_GAME_MOBILE: "/admin/game-mobile",
  ACTION_LIVESTREAM: "/admin/livestream",
  ACTION_NOTIFY: "/admin/notify",
+ GET_LIST_BY_TYPE_subscribe: "/admin/post/subscribe"
 }
 
 export default ApiConst

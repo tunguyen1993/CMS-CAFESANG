@@ -1,0 +1,47 @@
+<nb-card style="width: 640px">
+    <nb-card-header>
+        <span *ngIf="user">CẬP NHẬT TÀI KHOẢN</span>
+        <span *ngIf="!user">TẠO TÀI KHOẢN</span>
+    </nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="angForm" novalidate (ngSubmit)=" user  ?  onUpdate(): onSubmit()">
+            <div class="form-group mb-4">
+                <label class="center-block w-100">
+                    <div class="mb-3 text-capitalize"><b>EMAIL:</b></div>
+                    <input type="text" nbInput fullWidth
+                           [status]="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched) ? 'danger' : 'basic'"
+                           placeholder="email" formControlName="email">
+                </label>
+            </div>
+            <div class="form-group mb-4">
+                <label class="center-block w-100">
+                    <div class="mb-3 text-capitalize"><b>Tên đầy đủ:</b></div>
+                    <input type="text" nbInput fullWidth
+                           [status]="angForm.controls['full_name'].invalid && (angForm.controls['full_name'].dirty || angForm.controls['full_name'].touched) ? 'danger' : 'basic'"
+                           placeholder="Tên đầy đủ" formControlName="full_name">
+                </label>
+            </div>
+            <div class="form-group mb-4">
+                <label class="center-block w-100">
+                    <div class="mb-3 text-capitalize"><b>Mật khẩu:</b></div>
+                    <input type="text" nbInput fullWidth
+                           [status]="angForm.controls['password'].invalid && (angForm.controls['password'].dirty || angForm.controls['password'].touched) ? 'danger' : 'basic'"
+                           placeholder="Mật khẩu" formControlName="password">
+                </label>
+            </div>
+            <div class="form-group mb-4">
+                <label class="center-block w-100">
+                    <div class="mb-3 text-capitalize"><b>Quyền:</b></div>
+                    <nb-select placeholder="Quyền" formControlName="role" fullWidth>
+                        <nb-option [value]="'ADMIN'">ADMIN</nb-option>
+                        <nb-option [value]="'USER'">USER</nb-option>
+                    </nb-select>
+                </label>
+            </div>
+            <div class="form-group mb-4">
+                <button fullWidth nbButton outline
+                        status="primary"> {{user ? 'CẬP NHẬT TÀI KHOẢN' : 'TẠO TÀI KHOẢN'  }}</button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>

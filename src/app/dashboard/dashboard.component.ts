@@ -243,6 +243,16 @@ export class DashboardComponent implements OnInit {
                     link: '/dashboard/settings',
                     icon: {icon: 'settings-outline', pack: 'eva'},
                 },
+                {
+                    title: "Đăng ký",
+                    link: "/dashboard/subscribe",
+                    icon: {icon: "list-outline", pack: 'eva'},
+                },
+                {
+                    title: "Tạo Đăng ký",
+                    link: "/dashboard/subscribe-create",
+                    icon: {icon: "list-outline", pack: 'eva'},
+                }
             ]
         },
         {

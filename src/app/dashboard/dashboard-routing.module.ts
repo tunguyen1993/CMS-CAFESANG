@@ -11,6 +11,7 @@ import {CreateGameMobileComponent} from "./manager-posts/create-game-mobile/crea
 import {CreateAdvertisementComponent} from "./manager-posts/create-advertisement/create-advertisement.component";
 import {CreateGameCardComponent} from "./manager-posts/create-game-card/create-game-card.component";
 import {CreateNotiComponent} from "./manager-posts/create-noti/create-noti.component";
+import {CreateSubscribeComponent} from "./manager-posts/create-subscribe/create-subscribe.component";
 
 const routes: Routes = [
     {
@@ -209,6 +210,18 @@ const routes: Routes = [
                     post_type: "LIVESTREAM",
                     title: "Livestreams"
                 }
+            },
+            {
+                path: 'subscribe',
+                component: ListsComponent,
+                data: {
+                    post_type: "subscribe",
+                    title: "ĐĂNG KÝ"
+                }
+            },
+            {
+                path: "subscribe-create",
+                component: CreateSubscribeComponent,
             },
             {
                 path: "livestream-create",
