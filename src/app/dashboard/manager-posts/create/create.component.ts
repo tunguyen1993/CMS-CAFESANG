@@ -145,6 +145,7 @@ export class CreateComponent implements OnInit {
         if (this.imageListUpload) {
             this.service.uploadImageFile(this.imageListUpload).subscribe(res => {
                 delete data.category_id;
+                data.image = res
                 if (this.angForm?.value.video_type === 'upload' && this.videoUpload) {
                     this.service.uploadVideo(this.videoUpload)
                         .subscribe(res => {
