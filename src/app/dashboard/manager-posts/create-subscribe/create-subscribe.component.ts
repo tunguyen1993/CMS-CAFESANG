@@ -112,6 +112,7 @@ export class CreateSubscribeComponent implements OnInit {
         if (this.imageListUpload) {
             this.service.uploadImageFile(this.imageListUpload).subscribe(res => {
                 delete data.category_id;
+                data.image = res
                 this.service.updatePost(this.post.id, data).subscribe(res => {
                     this.angForm.reset()
                 })
