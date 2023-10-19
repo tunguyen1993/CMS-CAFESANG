@@ -120,6 +120,7 @@ export class CreateGameCardComponent implements OnInit {
         }
         if (this.imageListUpload) {
             this.service.uploadImageFile(this.imageListUpload).subscribe(res => {
+                data.image= res
                 this.service.updatePost(this.post.id, data, this.is_fake)
                     .subscribe(res => {
                         this.imageList = undefined;
