@@ -16,7 +16,7 @@ export class PageService extends BaseAPIService {
         if (category_id) {
             return this.getPostsByCategory(category_id, fake)
         }
-        return this.actionGet(`${ApiConst.GET_POST_TYPE}?type=${PostTypeConst[postType]}?fake=${fake ? "fake" : ""}`)
+        return this.actionGet(`${ApiConst.GET_POST_TYPE}?type=${PostTypeConst[postType]}&fake=${fake ? "fake" : ""}`)
     }
 
     getPostsByCategory(categoryId: number, fake: boolean = false) {
